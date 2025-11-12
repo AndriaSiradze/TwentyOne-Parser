@@ -1,0 +1,9 @@
+betterlogging
+langchain_core
+feedparser
+langchain
+langchain_community
+langchain_core
+requests
+selenium
+webdriver_manager

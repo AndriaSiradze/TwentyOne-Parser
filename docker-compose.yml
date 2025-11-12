@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  bot:
+    container_name: 'Parser'
+    image: "parser"
+    stop_signal: SIGINT
+    build:
+      context: .
+    shm_size: 2gb
+    init: true
+
+    working_dir: "/usr/src/app/parser"
+    volumes:
+      - .:/usr/src/app/parser
+    command: python3 -m main
+    restart: always
+    env_file:
+      - ".env"
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    networks:
+      - database_default
+
+networks:
+  database_default:
+    external: true
+
+
