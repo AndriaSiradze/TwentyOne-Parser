@@ -85,7 +85,6 @@ class NewsChecker:
         async with self.session_pool() as session:
             repo = RequestsRepo(session)
             last_news = [news.title for news in await repo.news.get_latest_news(days=3)]
-            logging.info(last_news)
         if not await self._check_for_date(date):
             logging.info('date check failed')
             result = CheckEntryResult(failed=True,
