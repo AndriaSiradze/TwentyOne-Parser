@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from aiogram import Bot
 from aiogram.exceptions import TelegramForbiddenError, TelegramBadRequest
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, LinkPreviewOptions
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
@@ -61,7 +61,8 @@ class Broadcaster:
         ])
 
         text = await self.build_response(translate_result, source)
-        message = await self.bot.send_message(self.redaction_group, text, reply_markup=keyboard)
+        message = await self.bot.send_message(self.redaction_group, text, reply_markup=keyboard,
+                                              link_preview_options=LinkPreviewOptions(is_disabled=True))
         return message.message_id
 
     async def build_response(self, translate_result, source):
